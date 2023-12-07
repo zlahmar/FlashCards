@@ -55,7 +55,7 @@ export const SignIn = () => {
             </div>
           </form>
           <p>Vous n'avez pas de compte ? </p>
-          <Link to={"/inscription"}>Créer un compte</Link>
+          <Link to={"/inscription"} className="text-indigo-500">Créer un compte</Link>
         </CardContent>
 
         <CardFooter className="flex justify-between">

@@ -10,11 +10,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const SignIn = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  // HOOK Pour naviguer
+  const navigate = useNavigate();
+
   return (
     <div className="w-1/2 flex items-center justify-center">
       <Card className="w-[350px] shadow-lg">
@@ -64,7 +68,8 @@ export const SignIn = () => {
           >
             Annuler
           </Button>
-          <Button onClick={() => console.log(email)}>Valider</Button>
+          {/* Se connecter par la bdd */}
+          <Button onClick={() => navigate("/")}>Valider</Button>
         </CardFooter>
       </Card>
     </div>

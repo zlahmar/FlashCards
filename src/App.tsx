@@ -9,7 +9,9 @@ import { User, onAuthStateChanged } from "firebase/auth";
 import { authentification } from "./services/firebase";
 import { AuthContext } from "./context/AuthContext";
 
+
 import CardsAleatoires from "./pages/CardsAleatoires";
+import CreationCards from './pages/CreationCards';
 import { ProtectedRoute } from "./routes/ProtectedRoute";
 import { Profile } from "./pages/Profile";
 
@@ -54,6 +56,10 @@ function App() {
             <Route path="/connexion" element={<SignIn />} />
             <Route path="/inscription" element={<SignUp />} />
           </Route>
+
+          <Route path="/cards-aleatoires" element={<CardsAleatoires />} />
+          <Route path="/cards" element={<CreationCards />} />
+
           <Route path="*" element={<h1> Erreur 404</h1>} />
         </Routes>
       </BrowserRouter>

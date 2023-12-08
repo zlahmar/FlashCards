@@ -12,19 +12,18 @@ interface Flashcard {
 
 const CardsAleatoires: React.FC = () => {
   const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        'https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple'
+      );
+      setFlashcards(response.data.results);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          'https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple'
-        );
-        setFlashcards(response.data.results);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
     fetchData();
   }, []);
 

@@ -11,6 +11,7 @@ import { authentification } from "./services/firebase";
 import { AuthContext } from "./context/AuthContext";
 
 import CardsAleatoires from './pages/CardsAleatoires';
+import CreationCards from './pages/CreationCards';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/inscription" element={<SignUp />} />
           </Route>
           <Route path="/cards-aleatoires" element={<CardsAleatoires />} />
+          <Route path="/cards" element={<CreationCards />} />
           <Route path="*" element={<h1> Erreur 404</h1>} />
         </Routes>
       </BrowserRouter>

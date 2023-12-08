@@ -11,14 +11,30 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { authentification } from "@/services/firebase";
+import { FirebaseError } from "firebase/app";
 
 export const SignUp = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [nom, setNom] = useState<string>("");
-  const [prenom, setPrenom] = useState<string>("");
 
-  const navigate = useNavigate();
+  const [error, setError] = useState<string>("");
+
+  const handleSignUp = async () => {
+    try {
+      await createUserWithEmailAndPassword(authentification, email, password);
+    } catch (err) {
+      if (err instanceof FirebaseError) {
+        setError(err.message);
+      } else {
+        setError("Une erreur est survenue.");
+      }
+    } finally {
+      navigate("/");
+    }
+  };
 
   return (
     <div className="w-1/2 flex items-center justify-center">
@@ -30,28 +46,6 @@ export const SignUp = () => {
         <CardContent>
           <form>
             <div className="grid w-full items-center gap-4">
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="nom">Nom</Label>
-                <Input
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setNom(e.target.value)
-                  }
-                  id="nom"
-                  placeholder="galvin"
-                  value={nom}
-                />
-              </div>
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="prenom">Prenom</Label>
-                <Input
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setPrenom(e.target.value)
-                  }
-                  id="prenom"
-                  placeholder="matis"
-                  value={prenom}
-                />
-              </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -75,6 +69,7 @@ export const SignUp = () => {
                   value={password}
                 />
               </div>
+              {error && <p className="text-red-600">{error}</p>}
             </div>
           </form>
         </CardContent>
@@ -87,7 +82,7 @@ export const SignUp = () => {
           >
             Revenir à la connexion
           </Button>
-          <Button onClick={() => console.log(email)}>Valider</Button>
+          <Button onClick={handleSignUp}>Valider</Button>
         </CardFooter>
       </Card>
     </div>

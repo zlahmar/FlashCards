@@ -11,12 +11,23 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { authentification } from "@/services/firebase";
 
 export const SignIn = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  // HOOK Pour naviguer
+  const login = async () => {
+    const response = await signInWithEmailAndPassword(
+      authentification,
+      email,
+      password
+    );
+    console.log(response);
+    navigate("/");
+  };
+
   const navigate = useNavigate();
 
   return (
@@ -55,7 +66,9 @@ export const SignIn = () => {
             </div>
           </form>
           <p>Vous n'avez pas de compte ? </p>
-          <Link to={"/inscription"} className="text-indigo-500">Créer un compte</Link>
+          <Link to={"/inscription"} className="text-indigo-500">
+            Créer un compte
+          </Link>
         </CardContent>
 
         <CardFooter className="flex justify-between">
@@ -69,7 +82,7 @@ export const SignIn = () => {
             Annuler
           </Button>
           {/* Se connecter par la bdd */}
-          <Button onClick={() => navigate("/")}>Valider</Button>
+          <Button onClick={login}>Valider</Button>
         </CardFooter>
       </Card>
     </div>

@@ -17,15 +17,15 @@ import { authentification } from "@/services/firebase";
 export const SignIn = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const login = async () => {
-    const response = await signInWithEmailAndPassword(
-      authentification,
-      email,
-      password
-    );
-    console.log(response);
-    navigate("/");
+    try {
+      await signInWithEmailAndPassword(authentification, email, password);
+      navigate("/");
+    } catch (error) {
+      setError("Identifiants incorrects");
+    }
   };
 
   const navigate = useNavigate();
@@ -62,10 +62,11 @@ export const SignIn = () => {
                   placeholder="*********"
                   value={password}
                 />
+                {error && <p className="text-red-600">{error}</p>}
               </div>
             </div>
           </form>
-          <p>Vous n'avez pas de compte ? </p>
+          <p className="mt-4">Vous n'avez pas de compte ? </p>
           <Link to={"/inscription"} className="text-indigo-500">
             Créer un compte
           </Link>

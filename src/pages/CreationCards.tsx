@@ -3,10 +3,11 @@ import { db } from "../services/firebase";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import CardItem from "@/components/Carditem/CardItem";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { LayoutApp } from "@/layout/LayoutApp";
 
 interface FlashCards {
   id: string;
@@ -44,23 +45,23 @@ const CreationCards = () => {
       category: cardToAdd.category,
       correct_answer: cardToAdd.correct_answer,
     })
-      .then(response => {
+      .then((response) => {
         setFlashCards((previousState) => [
-            {
-                question: cardToAdd.question,
-                category: cardToAdd.category,
-                correct_answer: cardToAdd.correct_answer,
-                id: response.id,
-            },
-            ...previousState,
+          {
+            question: cardToAdd.question,
+            category: cardToAdd.category,
+            correct_answer: cardToAdd.correct_answer,
+            id: response.id,
+          },
+          ...previousState,
         ]);
 
         setCardToAdd({
           question: "",
           category: "",
           correct_answer: "",
-        })
-    })
+        });
+      })
       .catch((err) => console.log(err));
   };
 
@@ -69,14 +70,13 @@ const CreationCards = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Votre nouvelle carte</h1>
-      <Card className="w-[350px] shadow-lg">
+    <LayoutApp>
+      <Card className="shadow-lg pt-4">
         <CardContent>
           <form>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="category">Catégorie :</Label>
+                <CardTitle>Catégorie :</CardTitle>
                 <Input
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     setCardToAdd((previousState) => ({
@@ -89,7 +89,7 @@ const CreationCards = () => {
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="question">Question :</Label>
+                <CardTitle>Question :</CardTitle>
                 <Input
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     setCardToAdd((previousState) => ({
@@ -102,7 +102,7 @@ const CreationCards = () => {
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="correct_answer">La réponse :</Label>
+                <CardTitle>La réponse :</CardTitle>
                 <Input
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     setCardToAdd((previousState) => ({
@@ -133,7 +133,7 @@ const CreationCards = () => {
       {flashCards.map((card, i) => (
         <CardItem key={i} card={card} />
       ))}
-    </div>
+    </LayoutApp>
   );
 };
 

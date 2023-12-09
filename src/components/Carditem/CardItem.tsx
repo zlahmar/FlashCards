@@ -42,7 +42,7 @@ const CardItem = ({ card }: CardItemProps) => {
   // };
 
   return (
-    <Card className="w-[350px] shadow-lg">
+    <Card className="shadow-lg">
       <CardHeader>
         <CardTitle>Catégorie: {card.category}</CardTitle>
         <CardDescription>Question: {card.question}</CardDescription>

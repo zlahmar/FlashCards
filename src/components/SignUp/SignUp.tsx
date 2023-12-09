@@ -23,6 +23,12 @@ export const SignUp = () => {
   const [error, setError] = useState<string>("");
 
   const handleSignUp = async () => {
+    if (email.trim() === "" || !email.includes("@") || !email.includes(".")) {
+      setError("Veuillez entrer une adresse email valide.");
+    } else if (password.length < 8) {
+      setError("Le mot de passe doit contenir au moins 8 caractères.");
+    }
+
     try {
       await createUserWithEmailAndPassword(authentification, email, password);
     } catch (err) {
@@ -55,6 +61,8 @@ export const SignUp = () => {
                   id="email"
                   placeholder="matis.galvin@gmail.com"
                   value={email}
+                  required
+                  type="email"
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
@@ -67,6 +75,7 @@ export const SignUp = () => {
                   type="password"
                   placeholder="*********"
                   value={password}
+                  required
                 />
               </div>
               {error && <p className="text-red-600">{error}</p>}
@@ -82,7 +91,9 @@ export const SignUp = () => {
           >
             Revenir à la connexion
           </Button>
-          <Button onClick={handleSignUp}>Valider</Button>
+          <Button disabled={password.length < 8} onClick={handleSignUp}>
+            Valider
+          </Button>
         </CardFooter>
       </Card>
     </div>

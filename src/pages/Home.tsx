@@ -15,7 +15,7 @@ export const Home = () => {
           Profil
         </Link>
         <Link
-          to="/creer-flashcards"
+          to="/cards"
           className="bg-indigo-700 text-white px-4 py-2 rounded"
         >
           Créer des Flashcards

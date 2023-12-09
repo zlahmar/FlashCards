@@ -20,7 +20,7 @@ const Flashcard: React.FC<FlashcardProps> = ({ flashcard }) => {
   };
 
   return (
-    <div className="bg-blue-200 p-4 rounded shadow">
+    <div className="bg-white p-4 rounded shadow">
       <p className="font-bold text-lg mt-4">Category:</p>
       <p>{flashcard.category}</p>
 

@@ -21,9 +21,10 @@ interface CardItemProps {
     category: string;
     correct_answer: string;
   };
+  removeCard: (id: string) => void;
 }
 
-const CardItem = ({ card }: CardItemProps) => {
+const CardItem = ({ card, removeCard }: CardItemProps) => {
   const [showAnswer, setShowAnswer] = useState(false);
 
   // const updateCard = async (cardId, newData) => {
@@ -34,25 +35,21 @@ const CardItem = ({ card }: CardItemProps) => {
   //   );
   // };
 
-  // const deleteCard = async cardId => {
-  //   const currentCard = doc(db, 'FlashCards', cardId);
-  //   await deleteDoc(currentCard).catch(err =>
-  //     console.log('DeleteCardError ->', err)
-  //   );
-  // };
-
   return (
-    <Card className="shadow-lg">
+    <Card className="shadow-lg relative">
       <CardHeader>
         <CardTitle>Catégorie: {card.category}</CardTitle>
         <CardDescription>Question: {card.question}</CardDescription>
       </CardHeader>
-       <CardContent>
+      <CardContent>
         <Button onClick={() => setShowAnswer(!showAnswer)}>
           {showAnswer ? "Cacher la réponse" : "Afficher la réponse"}
         </Button>
       </CardContent>
       <CardFooter>{showAnswer && <p> {card.correct_answer}</p>}</CardFooter>
+      <Button onClick={() => removeCard(card.id)} className="absolute right-5 bottom-5">
+        Delete
+      </Button>
     </Card>
   );
 };

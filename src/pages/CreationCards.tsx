@@ -1,6 +1,12 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { db } from "../services/firebase";
-import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+} from "firebase/firestore";
 import CardItem from "@/components/Carditem/CardItem";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
@@ -76,7 +82,7 @@ const CreationCards = () => {
   }, []);
 
   return (
-    <LayoutApp>
+    <LayoutApp titre="Mes flashCards">
       <Card className="shadow-lg pt-4">
         <CardContent>
           <form>
@@ -137,7 +143,7 @@ const CreationCards = () => {
         </CardFooter>
       </Card>
       {flashCards.map((card, i) => (
-        <CardItem key={i} card={card} removeCard={removeCard}/>
+        <CardItem key={i} card={card} removeCard={removeCard} />
       ))}
     </LayoutApp>
   );

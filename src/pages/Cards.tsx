@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 interface FlashcardProps {
   flashcard: {
@@ -20,7 +19,7 @@ const Flashcard: React.FC<FlashcardProps> = ({ flashcard }) => {
   };
 
   return (
-    <div className="bg-white p-4 rounded shadow">
+    <div className="transition-all bg-slate-500 hover:bg-white p-4 rounded shadow grid">
       <p className="font-bold text-lg mt-4">Category:</p>
       <p>{flashcard.category}</p>
 
@@ -30,8 +29,21 @@ const Flashcard: React.FC<FlashcardProps> = ({ flashcard }) => {
       <p className="font-bold text-lg mt-4">Question:</p>
       <p>{decodeURIComponent(flashcard.question)}</p>
 
+      <div className="mt-4">
+        <p className="font-bold">Solutions disponibles :</p>
+        <ul className="list-disc pl-4">
+          <li>{decodeURIComponent(flashcard.correct_answer)}</li>
+          {flashcard.incorrect_answers.map((incorrectAnswer, i) => (
+            <li key={i}>{decodeURIComponent(incorrectAnswer)}</li>
+          ))}
+        </ul>
+      </div>
+
       {/* Afficher le bouton Answer */}
-      <Button className="bg-blue-500 text-white px-4 py-2 rounded mt-4" onClick={toggleAnswers}>
+      <Button
+        className="bg-blue-500 text-white px-4 py-2 rounded mt-4 justify-self-end w-full"
+        onClick={toggleAnswers}
+      >
         Answer
       </Button>
 

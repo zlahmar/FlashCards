@@ -1,10 +1,9 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { db } from "../services/firebase";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import CardItem from "@/components/Carditem/CardItem";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
 import { LayoutApp } from "@/layout/LayoutApp";
@@ -23,8 +22,6 @@ const CreationCards = () => {
     correct_answer: "",
   });
   const [flashCards, setFlashCards] = useState<FlashCards[]>([]);
-
-  const navigate = useNavigate();
 
   const getFlashCardsFromFirestore = async () => {
     // Connexion avec la bdd Flashcards
@@ -63,6 +60,15 @@ const CreationCards = () => {
         });
       })
       .catch((err) => console.log(err));
+  };
+
+  const removeCard = async (id: string) => {
+    const updatedFlashCards = flashCards.filter((card) => card.id !== id);
+    const currentCard = doc(db, "FlashCards", id);
+    await deleteDoc(currentCard).catch((err) =>
+      console.log("DeleteCardError ->", err)
+    );
+    setFlashCards(updatedFlashCards);
   };
 
   useEffect(() => {
@@ -131,7 +137,7 @@ const CreationCards = () => {
         </CardFooter>
       </Card>
       {flashCards.map((card, i) => (
-        <CardItem key={i} card={card} />
+        <CardItem key={i} card={card} removeCard={removeCard}/>
       ))}
     </LayoutApp>
   );

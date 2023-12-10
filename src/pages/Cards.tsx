@@ -19,7 +19,7 @@ const Flashcard: React.FC<FlashcardProps> = ({ flashcard }) => {
   };
 
   return (
-    <div className="transition-all bg-slate-600 hover:bg-white p-4 rounded shadow grid">
+    <div className="transition-all bg-slate-400 hover:bg-white p-4 rounded shadow grid">
       <p className="font-bold text-lg mt-4">Category:</p>
       <p>{flashcard.category}</p>
 

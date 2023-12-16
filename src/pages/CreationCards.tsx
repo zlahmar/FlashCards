@@ -68,6 +68,14 @@ const CreationCards = () => {
       .catch((err) => console.log(err));
   };
 
+  const updateCard = (id: string, updatedCardData: FlashCards) => {
+    const updatedFlashCards = flashCards.map((card) =>
+      card.id === id ? { ...card, ...updatedCardData } : card
+    );
+  
+    setFlashCards(updatedFlashCards);
+  };
+
   const removeCard = async (id: string) => {
     const updatedFlashCards = flashCards.filter((card) => card.id !== id);
     const currentCard = doc(db, "FlashCards", id);

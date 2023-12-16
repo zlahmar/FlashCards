@@ -11,10 +11,9 @@ import CardItem from "@/components/Carditem/CardItem";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useNavigate } from "react-router-dom";
 import { LayoutApp } from "@/layout/LayoutApp";
 
-interface FlashCards {
+export interface FlashCards {
   id: string;
   question: string;
   category: string;
@@ -68,9 +67,9 @@ const CreationCards = () => {
       .catch((err) => console.log(err));
   };
 
-  const updateCard = (id: string, updatedCardData: FlashCards) => {
+  const updateCard = (updatedCardData: FlashCards) => {
     const updatedFlashCards = flashCards.map((card) =>
-      card.id === id ? { ...card, ...updatedCardData } : card
+      card.id === updatedCardData.id ? { ...card, ...updatedCardData } : card
     );
   
     setFlashCards(updatedFlashCards);
@@ -151,7 +150,12 @@ const CreationCards = () => {
         </CardFooter>
       </Card>
       {flashCards.map((card, i) => (
-        <CardItem key={i} card={card} removeCard={removeCard} />
+        <CardItem
+          updateCard={() => updateCard}
+          key={i}
+          card={card}
+          removeCard={removeCard}
+        />
       ))}
     </LayoutApp>
   );

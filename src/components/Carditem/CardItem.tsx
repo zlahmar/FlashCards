@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { useState } from "react";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../services/firebase";
 
 import { Button } from "@/components/ui/button";
@@ -13,15 +13,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { FlashCards } from "@/pages/CreationCards";
 
 interface CardItemProps {
-  card: {
-    id: string;
-    question: string;
-    category: string;
-    correct_answer: string;
-  };
-  updateCard: (id: string, updatedCardData: any) => void;
+  card: FlashCards;
+  updateCard: (updateCard: unknown) => void;
   removeCard: (id: string) => void;
 }
 
@@ -30,10 +26,13 @@ const CardItem = ({ card, removeCard, updateCard }: CardItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [updatedCategory, setUpdatedCategory] = useState(card.category);
   const [updatedQuestion, setUpdatedQuestion] = useState(card.question);
-  const [updatedCorrectAnswer, setUpdatedCorrectAnswer] = useState(card.correct_answer);
+  const [updatedCorrectAnswer, setUpdatedCorrectAnswer] = useState(
+    card.correct_answer
+  );
 
   const handleUpdate = async () => {
     const updatedData = {
+      id: card.id,
       category: updatedCategory,
       question: updatedQuestion,
       correct_answer: updatedCorrectAnswer,
@@ -42,7 +41,7 @@ const CardItem = ({ card, removeCard, updateCard }: CardItemProps) => {
     // Mise à jour dans la base de données
     try {
       await updateDoc(doc(db, "FlashCards", card.id), updatedData);
-      updateCard(card.id, updatedData);
+      updateCard(updatedData);
       setIsEditing(false);
     } catch (error) {
       console.error("Erreur lors de la mise à jour :", error);
@@ -61,23 +60,29 @@ const CardItem = ({ card, removeCard, updateCard }: CardItemProps) => {
     <Card className="shadow-lg relative">
       <CardHeader>
         <CardTitle>
-          Catégorie: {isEditing ? (
+          Catégorie:{" "}
+          {isEditing ? (
             <Input
               type="text"
               value={updatedCategory}
               onChange={(e) => setUpdatedCategory(e.target.value)}
             />
+          ) : updatedCategory ? (
+            updatedCategory
           ) : (
             card.category
           )}
         </CardTitle>
         <CardDescription>
-          Question: {isEditing ? (
+          Question:{" "}
+          {isEditing ? (
             <Input
               type="text"
               value={updatedQuestion}
               onChange={(e) => setUpdatedQuestion(e.target.value)}
             />
+          ) : updatedQuestion ? (
+            updatedQuestion
           ) : (
             card.question
           )}
@@ -91,7 +96,11 @@ const CardItem = ({ card, removeCard, updateCard }: CardItemProps) => {
         )}
       </CardContent>
       <CardFooter>
-        {showAnswer && <p>{isEditing ? updatedCorrectAnswer : card.correct_answer}</p>}
+        {showAnswer && (
+          <p>
+            {updatedCorrectAnswer ? updatedCorrectAnswer : card.correct_answer}
+          </p>
+        )}
       </CardFooter>
       {isEditing ? (
         <>
@@ -103,20 +112,31 @@ const CardItem = ({ card, removeCard, updateCard }: CardItemProps) => {
             />
           </CardFooter>
           <div className="flex space-x-2 absolute left-500 bottom-5">
-          <Button onClick={handleUpdate}>
-            Valider
-          </Button>
-          <Button onClick={handleCancel}>
-            Annuler
-          </Button>
-        </div>
+            <Button
+              disabled={
+                updatedCategory === "" ||
+                updatedQuestion === "" ||
+                updatedCorrectAnswer === ""
+              }
+              onClick={handleUpdate}
+            >
+              Valider
+            </Button>
+            <Button onClick={handleCancel}>Annuler</Button>
+          </div>
         </>
       ) : (
-        <Button onClick={() => setIsEditing(true)} className="absolute left-500 bottom-5">
+        <Button
+          onClick={() => setIsEditing(true)}
+          className="absolute left-500 bottom-5"
+        >
           Modifier
         </Button>
       )}
-      <Button onClick={() => removeCard(card.id)} className="absolute right-5 bottom-5">
+      <Button
+        onClick={() => removeCard(card.id)}
+        className="absolute right-5 bottom-5"
+      >
         Supprimer
       </Button>
     </Card>

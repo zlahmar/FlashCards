@@ -72,7 +72,7 @@ const CreationCards = () => {
     const updatedFlashCards = flashCards.map((card) =>
       card.id === updatedCardData.id ? { ...card, ...updatedCardData } : card
     );
-  
+
     setFlashCards(updatedFlashCards);
   };
 
@@ -152,19 +152,14 @@ const CreationCards = () => {
       </Card>
       {flashCards.length > 0 ? (
         flashCards.map((card, i) => (
-          <CardItem key={i} card={card} removeCard={removeCard} />
+          <CardItem
+            updateCard={() => updateCard}
+            key={i}
+            card={card}
+            removeCard={removeCard}
+          />
         ))
       ) : (
-        <Loading />
-      )}
-      {flashCards.length > 0 ? flashCards.map((card, i) => (
-        <CardItem
-          updateCard={() => updateCard}
-          key={i}
-          card={card}
-          removeCard={removeCard}
-        />
-      )): (
         <Loading />
       )}
     </LayoutApp>

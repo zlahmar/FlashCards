@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { LayoutApp } from "@/layout/LayoutApp";
+import { Loading } from "@/components/Loading/Loading";
 
 export interface FlashCards {
   id: string;
@@ -149,14 +150,23 @@ const CreationCards = () => {
           </Button>
         </CardFooter>
       </Card>
-      {flashCards.map((card, i) => (
+      {flashCards.length > 0 ? (
+        flashCards.map((card, i) => (
+          <CardItem key={i} card={card} removeCard={removeCard} />
+        ))
+      ) : (
+        <Loading />
+      )}
+      {flashCards.length > 0 ? flashCards.map((card, i) => (
         <CardItem
           updateCard={() => updateCard}
           key={i}
           card={card}
           removeCard={removeCard}
         />
-      ))}
+      )): (
+        <Loading />
+      )}
     </LayoutApp>
   );
 };

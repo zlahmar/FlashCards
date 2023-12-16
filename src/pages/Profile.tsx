@@ -35,13 +35,13 @@ export const Profile = ({ user }: ProfileProps) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-300 to-indigo-400 h-screen flex flex-col justify-center items-center">
+    <div className="h-screen flex flex-col justify-center items-center">
       <Button className="mb-4 w-[350px]" onClick={() => navigate(-1)}>
         Retour
       </Button>
       <Card className="w-[350px] shadow-lg">
         <CardHeader>
-          <CardTitle>Bienvenue sur votre page de profile</CardTitle>
+          <CardTitle>Votre compte</CardTitle>
         </CardHeader>
         <CardContent>
           <Label htmlFor="email-used">Email utilisé</Label>

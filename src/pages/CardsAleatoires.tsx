@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Flashcard from "./Cards";
 import { LayoutApp } from "@/layout/LayoutApp";
+import { Loading } from "@/components/Loading/Loading";
 
 interface Flashcard {
   category: string;
@@ -30,9 +31,13 @@ const CardsAleatoires: React.FC = () => {
 
   return (
     <LayoutApp titre={"Flashcards Aléatoires"}>
-      {flashcards.map((flashcard, index) => (
-        <Flashcard key={index} flashcard={flashcard} />
-      ))}
+      {flashcards.length > 0 ? (
+        flashcards.map((flashcard, index) => (
+          <Flashcard key={index} flashcard={flashcard} />
+        ))
+      ) : (
+        <Loading />
+      )}
     </LayoutApp>
   );
 };

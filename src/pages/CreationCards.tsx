@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { LayoutApp } from "@/layout/LayoutApp";
 import { Loading } from "@/components/Loading/Loading";
 
-interface FlashCards {
+export interface FlashCards {
   id: string;
   question: string;
   category: string;
@@ -66,6 +66,14 @@ const CreationCards = () => {
         });
       })
       .catch((err) => console.log(err));
+  };
+
+  const updateCard = (updatedCardData: FlashCards) => {
+    const updatedFlashCards = flashCards.map((card) =>
+      card.id === updatedCardData.id ? { ...card, ...updatedCardData } : card
+    );
+  
+    setFlashCards(updatedFlashCards);
   };
 
   const removeCard = async (id: string) => {
@@ -147,6 +155,16 @@ const CreationCards = () => {
           <CardItem key={i} card={card} removeCard={removeCard} />
         ))
       ) : (
+        <Loading />
+      )}
+      {flashCards.length > 0 ? flashCards.map((card, i) => (
+        <CardItem
+          updateCard={() => updateCard}
+          key={i}
+          card={card}
+          removeCard={removeCard}
+        />
+      )): (
         <Loading />
       )}
     </LayoutApp>

@@ -27,36 +27,17 @@ function App() {
     <AuthContext.Provider value={currentUser}>
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute user={currentUser}>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/random-cards"
-            element={
-              <ProtectedRoute user={currentUser}>
-                <RandomCards />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute user={currentUser}>
-                <Profile user={currentUser} />
-              </ProtectedRoute>
-            }
-          />
+          <Route element={<ProtectedRoute user={currentUser} />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/random-cards" element={<RandomCards />} />
+            <Route path="/profile" element={<Profile user={currentUser} />} />
+            <Route path="/cards" element={<CardManager />} />
+          </Route>
+
           <Route element={<LayoutConnexion />}>
             <Route path="/connexion" element={<SignIn />} />
             <Route path="/inscription" element={<SignUp />} />
           </Route>
-
-          <Route path="/cards" element={<CardManager />} />
 
           <Route path="*" element={<h1> Erreur 404</h1>} />
         </Routes>

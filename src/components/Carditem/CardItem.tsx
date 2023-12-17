@@ -13,7 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { FlashCards } from "@/pages/CreationCards";
+import { FlashCards } from "@/pages/CardManager";
 
 interface CardItemProps {
   card: FlashCards;
@@ -104,13 +104,13 @@ const CardItem = ({ card, removeCard, updateCard }: CardItemProps) => {
       </CardFooter>
       {isEditing ? (
         <>
-          <CardFooter>
+          <div>
             <Input
               type="text"
               value={updatedCorrectAnswer}
               onChange={(e) => setUpdatedCorrectAnswer(e.target.value)}
             />
-          </CardFooter>
+          </div>
           <div className="flex space-x-2 absolute left-500 bottom-5">
             <Button
               disabled={
@@ -135,9 +135,9 @@ const CardItem = ({ card, removeCard, updateCard }: CardItemProps) => {
       )}
       <Button
         onClick={() => removeCard(card.id)}
-        className="absolute right-5 bottom-5"
+        className="absolute top-1 right-1 rounded-full scale-75 bg-red-500"
       >
-        Supprimer
+        X
       </Button>
     </Card>
   );

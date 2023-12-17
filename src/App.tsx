@@ -9,11 +9,10 @@ import { User, onAuthStateChanged } from "firebase/auth";
 import { authentification } from "./services/firebase";
 import { AuthContext } from "./context/AuthContext";
 
-
-import CardsAleatoires from "./pages/CardsAleatoires";
-import CreationCards from './pages/CreationCards';
 import { ProtectedRoute } from "./routes/ProtectedRoute";
 import { Profile } from "./pages/Profile";
+import CardManager from "./pages/CardManager";
+import RandomCards from "./pages/CardsAleatoires";
 
 function App() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -37,10 +36,10 @@ function App() {
             }
           />
           <Route
-            path="/cards-aleatoires"
+            path="/random-cards"
             element={
               <ProtectedRoute user={currentUser}>
-                <CardsAleatoires />
+                <RandomCards />
               </ProtectedRoute>
             }
           />
@@ -57,8 +56,7 @@ function App() {
             <Route path="/inscription" element={<SignUp />} />
           </Route>
 
-          <Route path="/cards-aleatoires" element={<CardsAleatoires />} />
-          <Route path="/cards" element={<CreationCards />} />
+          <Route path="/cards" element={<CardManager />} />
 
           <Route path="*" element={<h1> Erreur 404</h1>} />
         </Routes>

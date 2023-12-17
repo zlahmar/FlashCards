@@ -21,7 +21,7 @@ export interface FlashCards {
   correct_answer: string;
 }
 
-const CreationCards = () => {
+const CardManager = () => {
   const [cardToAdd, setCardToAdd] = useState({
     question: "",
     category: "",
@@ -37,35 +37,36 @@ const CreationCards = () => {
     const datas = await getDocs(collectionFlashCards);
 
     const allCards = datas.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    console.log(allCards);
     setFlashCards(allCards);
   };
 
-  const addFlashCard = async () => {
-    // Ajouter la carte
-    await addDoc(collection(db, "FlashCards"), {
-      question: cardToAdd.question,
-      category: cardToAdd.category,
-      correct_answer: cardToAdd.correct_answer,
-    })
-      .then((response) => {
-        setFlashCards((previousState) => [
-          {
-            question: cardToAdd.question,
-            category: cardToAdd.category,
-            correct_answer: cardToAdd.correct_answer,
-            id: response.id,
-          },
-          ...previousState,
-        ]);
+  console.log("Valeur du tableau ", flashCards);
 
-        setCardToAdd({
-          question: "",
-          category: "",
-          correct_answer: "",
-        });
-      })
-      .catch((err) => console.log(err));
+  const addFlashCard = async () => {
+    try {
+      const response = await addDoc(collection(db, "FlashCards"), {
+        question: cardToAdd.question,
+        category: cardToAdd.category,
+        correct_answer: cardToAdd.correct_answer,
+      });
+
+      const newCard = {
+        question: cardToAdd.question,
+        category: cardToAdd.category,
+        correct_answer: cardToAdd.correct_answer,
+        id: response.id,
+      };
+
+      setFlashCards((previousState) => [newCard, ...previousState]);
+      /*
+      setCardToAdd({
+        question: "",
+        category: "",
+        correct_answer: "",
+      });*/
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const updateCard = (updatedCardData: FlashCards) => {
@@ -79,9 +80,7 @@ const CreationCards = () => {
   const removeCard = async (id: string) => {
     const updatedFlashCards = flashCards.filter((card) => card.id !== id);
     const currentCard = doc(db, "FlashCards", id);
-    await deleteDoc(currentCard).catch((err) =>
-      console.log("DeleteCardError ->", err)
-    );
+    await deleteDoc(currentCard).catch((err) => console.log(err));
     setFlashCards(updatedFlashCards);
   };
 
@@ -151,10 +150,10 @@ const CreationCards = () => {
         </CardFooter>
       </Card>
       {flashCards.length > 0 ? (
-        flashCards.map((card, i) => (
+        flashCards.map((card) => (
           <CardItem
             updateCard={() => updateCard}
-            key={i}
+            key={card.id}
             card={card}
             removeCard={removeCard}
           />
@@ -166,4 +165,4 @@ const CreationCards = () => {
   );
 };
 
-export default CreationCards;
+export default CardManager;

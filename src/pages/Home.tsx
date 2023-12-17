@@ -21,7 +21,7 @@ export const Home = () => {
           Créer des Flashcards
         </Link>
         <Link
-          to="/cards-aleatoires"
+          to="/random-cards"
           className="bg-indigo-700 hover:bg-indigo-600 text-white   text-xl p-32 rounded-lg"
         >
           Cartes Aléatoires

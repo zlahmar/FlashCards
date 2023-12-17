@@ -12,7 +12,7 @@ interface Flashcard {
   question: string;
 }
 
-const CardsAleatoires: React.FC = () => {
+const RandomCards: React.FC = () => {
   const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
   const fetchData = async () => {
     try {
@@ -42,4 +42,4 @@ const CardsAleatoires: React.FC = () => {
   );
 };
 
-export default CardsAleatoires;
+export default RandomCards;

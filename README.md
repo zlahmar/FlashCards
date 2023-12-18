@@ -6,6 +6,11 @@ L'application de Flash Cards est une application web conçue pour aider les util
 
 En plus de la création manuelle de cartes, l'application propose également la possibilité d'accéder à des cartes aléatoires préparées grâce à une intégration avec une API externe. Cela permet aux utilisateurs de diversifier leur apprentissage en explorant des sujets variés.
 
+## Auteurs
+
+- [@zlahmar](https://github.com/zlahmar)
+- [@MatisGalvin](https://github.com/MatisGalvin)
+
 ## Fonctionnalités
 
 - **Créer des Cartes :** Créez facilement de nouvelles cartes mémoire avec des catégories, des questions et des réponses correctes.

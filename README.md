@@ -36,7 +36,7 @@ git clone https://github.com/votre-nom-utilisateur/FlashCards.git
 ### Installer les Dépendances :
 
 ```bash
-cd application-flash-cards
+cd FlashCards
 npm install
 ```
 ### Configurer Firebase :

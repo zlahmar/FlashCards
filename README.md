@@ -1,30 +1,55 @@
-# React + TypeScript + Vite
+# Application de Flash Cards
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+L'application de Flash Cards est une application web conçue pour aider les utilisateurs à créer, gérer et étudier des cartes mémoire. Que vous vous prépariez pour des examens, appreniez une nouvelle langue ou mémorisiez des informations, cette application fournit une interface conviviale pour créer, mettre à jour et réviser des cartes mémoire.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+En plus de la création manuelle de cartes, l'application propose également la possibilité d'accéder à des cartes aléatoires préparées grâce à une intégration avec une API externe. Cela permet aux utilisateurs de diversifier leur apprentissage en explorant des sujets variés.
 
-## Expanding the ESLint configuration
+## Fonctionnalités
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Créer des Cartes :** Créez facilement de nouvelles cartes mémoire avec des catégories, des questions et des réponses correctes.
+- **Modifier et Mettre à Jour :** Modifiez les cartes mémoire existantes pour maintenir à jour vos documents d'étude.
+- **Mode d'Étude :** Testez vos connaissances en parcourant les cartes mémoire et en révélant les réponses.
+- **Cartes Aléatoires via API :** Accédez à des cartes aléatoires préparées grâce à une intégration avec une API externe.
+- **Design Responsive :** Accédez à l'application sur divers appareils, y compris les ordinateurs de bureau, les tablettes et les téléphones mobiles.
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies Utilisées
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+- **React :** Bibliothèque JavaScript populaire pour la construction d'interfaces utilisateur.
+- **Firebase :** Service backend pour stocker et récupérer les données des cartes mémoire.
+- **Tailwind CSS :** Framework CSS utilisant une approche utilitaire pour le stylisme.
+
+## Démarrer
+
+### Cloner le Dépôt :
+
+```bash
+git clone https://github.com/votre-nom-utilisateur/FlashCards.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Installer les Dépendances :
+
+```bash
+cd application-flash-cards
+npm install
+```
+### Configurer Firebase :
+
+1. Créez un projet Firebase et configurez Firestore.
+2. Configurez vos identifiants Firebase dans le projet.
+
+### Exécuter l'Application :
+
+```bash
+npm run dev
+```
+
+### Accéder à l'Application :
+
+Ouvrez votre navigateur web et accédez à http://localhost:3000.
+
+## Licence 
+
+Ce projet est sous licence MIT.
+

@@ -6,9 +6,11 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute = ({ user }: ProtectedRouteProps) => {
+  const userLocal = localStorage.getItem("@user");
+  userLocal && console.log(JSON.parse(userLocal));
   if (!user) {
     return <Navigate to="/connexion" replace />;
   }
 
-  return <Outlet/>;
+  return <Outlet />;
 };

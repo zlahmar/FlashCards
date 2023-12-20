@@ -58,12 +58,11 @@ const CardManager = () => {
       };
 
       setFlashCards((previousState) => [newCard, ...previousState]);
-      /*
       setCardToAdd({
         question: "",
         category: "",
         correct_answer: "",
-      });*/
+      });
     } catch (err) {
       console.log(err);
     }

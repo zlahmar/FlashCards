@@ -57,7 +57,7 @@ const CardItem = ({ card, removeCard, updateCard }: CardItemProps) => {
   };
 
   return (
-    <Card className="shadow-lg relative">
+    <Card className="shadow-lg relative p-2">
       <CardHeader>
         <CardTitle>
           Catégorie:{" "}
@@ -128,7 +128,7 @@ const CardItem = ({ card, removeCard, updateCard }: CardItemProps) => {
       ) : (
         <Button
           onClick={() => setIsEditing(true)}
-          className="absolute left-500 bottom-5"
+          className="w-full"
         >
           Modifier
         </Button>

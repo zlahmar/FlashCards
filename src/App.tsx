@@ -20,6 +20,7 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(authentification, (user) => {
       setCurrentUser(user);
+      localStorage.setItem("@user", JSON.stringify(user));
     });
   }, []);
 

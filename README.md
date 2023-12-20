@@ -24,6 +24,7 @@ En plus de la création manuelle de cartes, l'application propose également la 
 - **React :** Bibliothèque JavaScript populaire pour la construction d'interfaces utilisateur.
 - **Firebase :** Service backend pour stocker et récupérer les données des cartes mémoire.
 - **Tailwind CSS :** Framework CSS utilisant une approche utilitaire pour le stylisme.
+- **Shadcn UI :** Composants pré fabriqués avec Radix UI and Tailwind CSS.
 
 ## Démarrer
 

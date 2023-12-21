@@ -40,10 +40,6 @@ git clone https://github.com/votre-nom-utilisateur/FlashCards.git
 cd FlashCards
 npm install
 ```
-### Configurer Firebase :
-
-1. Créez un projet Firebase et configurez Firestore.
-2. Configurez vos identifiants Firebase dans le projet.
 
 ### Exécuter l'Application :
 
